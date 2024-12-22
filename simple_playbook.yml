@@ -1,0 +1,9 @@
+---
+- name: Ensure basic packages are installed
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install htop
+      apt:
+        name: htop
+        state: present
