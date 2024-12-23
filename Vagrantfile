@@ -20,6 +20,10 @@ Vagrant.configure("2") do |config|
       # Create directories for incoming files (inventory, keys, playbook)
       mkdir -p /home/vagrant/.vagrant.d
       mkdir -p /home/vagrant/ansible
+
+      # Set ownership and permissions
+    chown vagrant:vagrant /home/vagrant/.vagrant.d
+    chmod 600 /home/vagrant/.vagrant.d/
     SHELL
   end
 
@@ -30,16 +34,6 @@ Vagrant.configure("2") do |config|
     master.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"
       vb.cpus = 4
-    end
-  end
-
-  # Worker Node Configuration (VMware)
-  config.vm.define "worker" do |worker|
-    worker.vm.hostname = "worker"
-    worker.vm.network "private_network", type: "dhcp"
-    worker.vm.provider "vmware_desktop" do |vb|
-      vb.memory = "1024"
-      vb.cpus = 2
     end
   end
 
